@@ -1,0 +1,958 @@
+// ==========================
+// Helper Functions
+// ==========================
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// ==========================
+// Notification System
+// ==========================
+function showNotification(message, type = 'info') {
+    const toast = document.getElementById('notificationToast');
+    const toastMessage = document.getElementById('toastMessage');
+    const toastIcon = document.getElementById('toastIcon');
+    
+    // Set message and icon based on type
+    toastMessage.textContent = message;
+    
+    switch(type) {
+        case 'success':
+            toastIcon.className = 'fas fa-check-circle text-green-500 mr-3 text-lg';
+            toast.classList.remove('bg-red-900/90', 'bg-yellow-900/90');
+            toast.classList.add('bg-green-900/90');
+            break;
+        case 'warning':
+            toastIcon.className = 'fas fa-exclamation-triangle text-yellow-500 mr-3 text-lg';
+            toast.classList.remove('bg-red-900/90', 'bg-green-900/90');
+            toast.classList.add('bg-yellow-900/90');
+            break;
+        case 'error':
+            toastIcon.className = 'fas fa-exclamation-circle text-red-500 mr-3 text-lg';
+            toast.classList.remove('bg-green-900/90', 'bg-yellow-900/90');
+            toast.classList.add('bg-red-900/90');
+            break;
+        default:
+            toastIcon.className = 'fas fa-info-circle text-blue-500 mr-3 text-lg';
+            toast.classList.remove('bg-red-900/90', 'bg-green-900/90', 'bg-yellow-900/90');
+    }
+    
+    // Show toast
+    toast.classList.remove('translate-x-full', 'hide');
+    toast.classList.add('show');
+    
+    // Auto hide after 3 seconds
+    setTimeout(() => {
+        toast.classList.remove('show');
+        toast.classList.add('hide');
+        setTimeout(() => {
+            toast.classList.remove('hide');
+            toast.classList.add('translate-x-full');
+        }, 300);
+    }, 3000);
+}
+
+// ==========================
+// Advanced Password Generators
+// ==========================
+
+// Random Password Generator with customizable options
+function generateRandomPassword(length, options = {}) {
+    const {
+        uppercase = true,
+        lowercase = true,
+        numbers = true,
+        symbols = true
+    } = options;
+    
+    let charset = '';
+    if (uppercase) charset += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    if (lowercase) charset += 'abcdefghijklmnopqrstuvwxyz';
+    if (numbers) charset += '0123456789';
+    if (symbols) charset += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+    
+    if (!charset) return ''; // No character types selected
+    
+    let password = '';
+    for (let i = 0; i < length; i++) {
+        password += charset.charAt(getRandomInt(0, charset.length - 1));
+    }
+    return password;
+}
+
+// Memorable Password Generator (based on word patterns)
+function generateMemorablePassword(wordCount, options = {}) {
+    const {
+        capitalize = true,
+        addNumbers = false
+    } = options;
+    
+    // Common words for memorable passwords
+    const words = [
+        'apple', 'brave', 'chair', 'dance', 'eagle', 'flame', 'grape', 'house',
+        'island', 'juice', 'knife', 'lemon', 'magic', 'night', 'ocean', 'piano',
+        'queen', 'river', 'stone', 'tiger', 'uncle', 'voice', 'water', 'xenon',
+        'youth', 'zebra', 'cloud', 'dream', 'earth', 'frost', 'glass', 'heart',
+        'image', 'jewel', 'kite', 'light', 'money', 'noise', 'peace', 'quiet',
+        'rain', 'snow', 'time', 'unity', 'value', 'world', 'yacht', 'zone'
+    ];
+    
+    let password = '';
+    for (let i = 0; i < wordCount; i++) {
+        let word = words[getRandomInt(0, words.length - 1)];
+        if (capitalize && i === 0) {
+            word = word.charAt(0).toUpperCase() + word.slice(1);
+        }
+        password += word;
+        
+        // Add a number after each word except the last one
+        if (addNumbers && i < wordCount - 1) {
+            password += getRandomInt(0, 9);
+        }
+    }
+    
+    return password;
+}
+
+// PIN Generator
+function generatePIN(length) {
+    let pin = '';
+    for (let i = 0; i < length; i++) {
+        pin += getRandomInt(0, 9);
+    }
+    return pin;
+}
+
+// ==========================
+// Password Strength Calculator
+// ==========================
+function calculateStrength(password) {
+    let score = 0;
+    const checks = {
+        length: false,
+        uppercase: false,
+        lowercase: false,
+        numbers: false,
+        symbols: false,
+        variety: false
+    };
+    
+    if (!password) return { score: 0, checks, label: 'None', color: '#666' };
+    
+    // Length check (minimum 8 characters)
+    if (password.length >= 8) {
+        score += 1;
+        checks.length = true;
+    }
+    
+    // Length bonus (12+ characters)
+    if (password.length >= 12) score += 1;
+    
+    // Character variety checks
+    if (/[A-Z]/.test(password)) {
+        score += 1;
+        checks.uppercase = true;
+    }
+    
+    if (/[a-z]/.test(password)) {
+        score += 1;
+        checks.lowercase = true;
+    }
+    
+    if (/[0-9]/.test(password)) {
+        score += 1;
+        checks.numbers = true;
+    }
+    
+    if (/[^A-Za-z0-9]/.test(password)) {
+        score += 1;
+        checks.symbols = true;
+    }
+    
+    // Variety bonus (all character types present)
+    if (checks.uppercase && checks.lowercase && checks.numbers && checks.symbols) {
+        score += 1;
+        checks.variety = true;
+    }
+    
+    // Determine strength label and color
+    let label, color;
+    if (score <= 2) {
+        label = 'Very Weak';
+        color = '#ff4d4d';
+    } else if (score <= 4) {
+        label = 'Weak';
+        color = '#ff9900';
+    } else if (score <= 6) {
+        label = 'Medium';
+        color = '#ffcc00';
+    } else if (score <= 8) {
+        label = 'Strong';
+        color = '#66cc66';
+    } else {
+        label = 'Very Strong';
+        color = '#00cc66';
+    }
+    
+    return { score, checks, label, color };
+}
+
+function updateStrengthMeter(password) {
+    const strength = calculateStrength(password);
+    const meter = document.getElementById("strengthMeter");
+    const text = document.getElementById("strengthText");
+    
+    // Update meter width (0-100%) with smooth animation
+    const percentage = (strength.score / 10) * 100;
+    
+    // Add smooth transition effect
+    meter.style.transition = 'width 0.5s ease, background-color 0.5s ease';
+    meter.style.width = percentage + "%";
+    meter.style.backgroundColor = strength.color;
+    
+    // Update text with animation
+    text.textContent = strength.label;
+    text.style.color = strength.color;
+    text.style.transition = 'color 0.5s ease';
+    
+    // Add pulse effect for very strong passwords
+    if (strength.label === 'Very Strong') {
+        meter.style.boxShadow = '0 0 15px ' + strength.color;
+        setTimeout(() => {
+            meter.style.boxShadow = '0 0 5px ' + strength.color;
+        }, 1000);
+    } else {
+        meter.style.boxShadow = 'none';
+    }
+    
+    return strength;
+}
+
+// ==========================
+// Password Expiration Functions
+// ==========================
+function getPasswordExpirationStatus(createdDate) {
+    const created = new Date(createdDate);
+    const now = new Date();
+    const diffTime = Math.abs(now - created);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    if (diffDays > 30) {
+        return { status: 'expired', days: diffDays - 30 };
+    } else if (diffDays > 25) {
+        return { status: 'expiring-soon', days: 30 - diffDays };
+    } else {
+        return { status: 'valid', days: 30 - diffDays };
+    }
+}
+
+function checkForExpiringPasswords() {
+    const passwords = getStoredPasswords();
+    const expiringPasswords = [];
+    
+    passwords.forEach((password, index) => {
+        const expiration = getPasswordExpirationStatus(password.created);
+        if (expiration.status === 'expired' || expiration.status === 'expiring-soon') {
+            expiringPasswords.push({
+                index,
+                ...password,
+                expiration
+            });
+        }
+    });
+    
+    // Show banner if there are expiring passwords
+    const banner = document.getElementById('expirationBanner');
+    const message = document.getElementById('expirationMessage');
+    
+    if (expiringPasswords.length > 0) {
+        banner.classList.remove('hidden');
+        if (expiringPasswords.length === 1) {
+            message.textContent = '1 password needs to be updated!';
+        } else {
+            message.textContent = `${expiringPasswords.length} passwords need to be updated!`;
+        }
+    } else {
+        banner.classList.add('hidden');
+    }
+    
+    return expiringPasswords;
+}
+
+function renderExpiringPasswordsList(passwords) {
+    const container = document.getElementById('expiringPasswordsList');
+    container.innerHTML = '';
+    
+    if (passwords.length === 0) {
+        container.innerHTML = '<p class="text-gray-400 text-center">No expiring passwords found.</p>';
+        return;
+    }
+    
+    passwords.forEach(password => {
+        const item = document.createElement('div');
+        item.className = `expiring-password-item ${password.expiration.status}`;
+        
+        const daysText = password.expiration.status === 'expired' 
+            ? `Expired ${password.expiration.days} days ago`
+            : `Expires in ${password.expiration.days} days`;
+            
+        item.innerHTML = `
+            <div class="flex justify-between items-center">
+                <div>
+                    <div class="font-bold text-lg">${password.site}</div>
+                    <div class="text-sm text-gray-400">${password.username}</div>
+                </div>
+                <div class="text-right">
+                    <div class="${password.expiration.status} font-medium">${daysText}</div>
+                    <button class="mt-3 px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 rounded-xl text-sm edit-expiring-btn neon-button-glow" data-index="${password.index}">
+                        Update
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        container.appendChild(item);
+    });
+    
+    // Add event listeners to edit buttons
+    document.querySelectorAll('.edit-expiring-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const index = parseInt(e.currentTarget.getAttribute('data-index'));
+            openEditModal(index);
+            closeExpiringModal();
+        });
+    });
+}
+
+// ==========================
+// IndexedDB Management
+// ==========================
+
+const DB_NAME = 'PassVaultDB';
+const DB_VERSION = 1;
+const STORE_NAME = 'passwords';
+
+// Open IndexedDB connection
+function openDB() {
+    return new Promise((resolve, reject) => {
+        const request = indexedDB.open(DB_NAME, DB_VERSION);
+        
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => resolve(request.result);
+        
+        request.onupgradeneeded = (event) => {
+            const db = event.target.result;
+            if (!db.objectStoreNames.contains(STORE_NAME)) {
+                const objectStore = db.createObjectStore(STORE_NAME, { keyPath: 'id', autoIncrement: true });
+                objectStore.createIndex('site', 'site', { unique: false });
+                objectStore.createIndex('username', 'username', { unique: false });
+            }
+        };
+    });
+}
+
+// Save passwords to IndexedDB
+async function savePasswordsToDB(passwords) {
+    try {
+        const db = await openDB();
+        const transaction = db.transaction([STORE_NAME], 'readwrite');
+        const objectStore = transaction.objectStore(STORE_NAME);
+        
+        // Clear existing data
+        await new Promise((resolve, reject) => {
+            const clearRequest = objectStore.clear();
+            clearRequest.onsuccess = () => resolve();
+            clearRequest.onerror = () => reject(clearRequest.error);
+        });
+        
+        // Add all passwords
+        for (const password of passwords) {
+            await new Promise((resolve, reject) => {
+                const addRequest = objectStore.add(password);
+                addRequest.onsuccess = () => resolve();
+                addRequest.onerror = () => reject(addRequest.error);
+            });
+        }
+        
+        return true;
+    } catch (e) {
+        console.error('Failed to save passwords to DB:', e);
+        return false;
+    }
+}
+
+// Get passwords from IndexedDB
+async function getPasswordsFromDB() {
+    try {
+        const db = await openDB();
+        const transaction = db.transaction([STORE_NAME], 'readonly');
+        const objectStore = transaction.objectStore(STORE_NAME);
+        
+        const passwords = [];
+        return new Promise((resolve, reject) => {
+            const request = objectStore.getAll();
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => reject(request.error);
+        });
+    } catch (e) {
+        console.error('Failed to retrieve passwords from DB:', e);
+        return [];
+    }
+}
+
+// ==========================
+// Storage Functions
+// ==========================
+
+// Get stored passwords
+async function getStoredPasswords() {
+    try {
+        return await getPasswordsFromDB();
+    } catch (e) {
+        console.error('Failed to retrieve passwords:', e);
+        return [];
+    }
+}
+
+// Save passwords
+async function savePasswords(passwords) {
+    try {
+        return await savePasswordsToDB(passwords);
+    } catch (e) {
+        console.error('Failed to save passwords:', e);
+        showNotification('Failed to save passwords. Please try again.', 'error');
+        return false;
+    }
+}
+
+// Unlock the application UI (now just shows main content)
+function unlockApplication() {
+    // Show main content
+    const mainContent = document.querySelector('main');
+    if (mainContent) {
+        mainContent.style.display = 'block';
+    }
+}
+
+// Clear passwords from DB
+async function clearPasswordsFromDB() {
+    try {
+        const db = await openDB();
+        const transaction = db.transaction([STORE_NAME], 'readwrite');
+        const objectStore = transaction.objectStore(STORE_NAME);
+        
+        await new Promise((resolve, reject) => {
+            const clearRequest = objectStore.clear();
+            clearRequest.onsuccess = () => resolve();
+            clearRequest.onerror = () => reject(clearRequest.error);
+        });
+        
+        return true;
+    } catch (e) {
+        console.error('Failed to clear passwords from DB:', e);
+        return false;
+    }
+}
+
+// ==========================
+// Date Formatting
+// ==========================
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+}
+
+function formatExpirationDate(createdDate) {
+    const created = new Date(createdDate);
+    const expirationDate = new Date(created);
+    expirationDate.setDate(expirationDate.getDate() + 30);
+    
+    return expirationDate.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+}
+
+// ==========================
+// Render Password Table
+// ==========================
+async function renderTable() {
+    const tableBody = document.querySelector("#passwordTable tbody");
+    const emptyState = document.getElementById("emptyState");
+    const passwords = await getStoredPasswords();
+    
+    // Clear existing rows
+    tableBody.innerHTML = '';
+    
+    // Show empty state if no passwords
+    if (passwords.length === 0) {
+        emptyState.classList.remove('hidden');
+        return;
+    }
+    
+    // Hide empty state
+    emptyState.classList.add('hidden');
+    
+    // Add each password as a row
+    passwords.forEach((entry, index) => {
+        const tr = document.createElement("tr");
+        
+        // Site
+        const tdSite = document.createElement("td");
+        tdSite.className = "font-medium text-lg";
+        tdSite.textContent = entry.site;
+        tr.appendChild(tdSite);
+        
+        // Username
+        const tdUsername = document.createElement("td");
+        tdUsername.textContent = entry.username;
+        tr.appendChild(tdUsername);
+        
+        // Password (masked)
+        const tdPassword = document.createElement("td");
+        tdPassword.className = "font-mono";
+        tdPassword.innerHTML = `<span class="password-mask">${'*'.repeat(Math.min(entry.password.length, 10))}${entry.password.length > 10 ? '...' : ''}</span>
+                               <button class="ml-3 text-cyan-400 hover:text-cyan-300 reveal-btn" data-index="${index}">
+                                 <i class="fas fa-eye"></i>
+                               </button>`;
+        tr.appendChild(tdPassword);
+        
+        // Created date
+        const tdDate = document.createElement("td");
+        tdDate.textContent = formatDate(entry.created);
+        tr.appendChild(tdDate);
+        
+        // Expiration date and status
+        const tdExpiration = document.createElement("td");
+        const expiration = getPasswordExpirationStatus(entry.created);
+        tdExpiration.textContent = formatExpirationDate(entry.created);
+        
+        // Add expiration status class
+        if (expiration.status === 'expired') {
+            tdExpiration.className = 'expired font-medium';
+            tdExpiration.innerHTML += ' <i class="fas fa-exclamation-circle ml-2"></i>';
+        } else if (expiration.status === 'expiring-soon') {
+            tdExpiration.className = 'expiring-soon font-medium';
+            tdExpiration.innerHTML += ' <i class="fas fa-exclamation-triangle ml-2"></i>';
+        }
+        
+        tr.appendChild(tdExpiration);
+        
+        // Add expiration warning for expired passwords
+        if (expiration.status === 'expired') {
+            // Add visual highlighting to the entire row
+            tr.classList.add('expired-row');
+            
+            // Add warning message after the expiration cell
+            const tdWarning = document.createElement("td");
+            tdWarning.className = "text-center";
+            tdWarning.innerHTML = '<div class="flex items-center justify-center text-red-500 font-medium animate-pulse">⚠️ This password needs to be updated.</div>';
+            tr.appendChild(tdWarning);
+        } else {
+            // Add empty cell for non-expired passwords to maintain table structure
+            const tdWarning = document.createElement("td");
+            tr.appendChild(tdWarning);
+        }
+        
+        // Actions
+        const tdActions = document.createElement("td");
+        tdActions.className = "text-center";
+        tdActions.innerHTML = `
+            <button class="action-btn edit-btn text-cyan-400 hover:text-cyan-300 mx-2 p-2 rounded-lg hover:bg-gray-700/50 transition-colors" data-index="${index}">
+                <i class="fas fa-edit"></i>
+            </button>
+            <button class="action-btn copy-btn text-green-400 hover:text-green-300 mx-2 p-2 rounded-lg hover:bg-gray-700/50 transition-colors" data-index="${index}" data-password="${entry.password}">
+                <i class="fas fa-copy"></i>
+            </button>
+            <button class="action-btn delete-btn text-red-400 hover:text-red-300 mx-2 p-2 rounded-lg hover:bg-gray-700/50 transition-colors" data-index="${index}">
+                <i class="fas fa-trash"></i>
+            </button>
+        `;
+        tr.appendChild(tdActions);
+        
+        tableBody.appendChild(tr);
+    });
+    
+    // Add event listeners to action buttons
+    document.querySelectorAll('.edit-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            const index = parseInt(e.currentTarget.getAttribute('data-index'));
+            await openEditModal(index);
+        });
+    });
+    
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const password = e.currentTarget.getAttribute('data-password');
+            copyToClipboard(password, e.currentTarget);
+        });
+    });
+    
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            const index = parseInt(e.currentTarget.getAttribute('data-index'));
+            await deletePassword(index);
+        });
+    });
+    
+    document.querySelectorAll('.reveal-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            const index = parseInt(e.currentTarget.getAttribute('data-index'));
+            await togglePasswordVisibility(index, e.currentTarget);
+        });
+    });
+    
+    // Check for expiring passwords
+    checkForExpiringPasswords();
+}
+
+// ==========================
+// Password Actions
+// ==========================
+function copyToClipboard(text, button) {
+    navigator.clipboard.writeText(text).then(() => {
+        // Show visual feedback
+        const originalHTML = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-check text-green-400"></i>';
+        setTimeout(() => {
+            button.innerHTML = originalHTML;
+        }, 2000);
+        showNotification('Password copied to clipboard!', 'success');
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+        showNotification('Failed to copy password to clipboard', 'error');
+    });
+}
+
+async function togglePasswordVisibility(index, button) {
+    const passwords = await getStoredPasswords();
+    const password = passwords[index].password;
+    const maskElement = button.previousElementSibling;
+    
+    if (maskElement.classList.contains('password-revealed')) {
+        // Hide password
+        maskElement.textContent = '*'.repeat(Math.min(password.length, 10)) + (password.length > 10 ? '...' : '');
+        maskElement.classList.remove('password-revealed');
+        button.innerHTML = '<i class="fas fa-eye"></i>';
+    } else {
+        // Show password
+        maskElement.textContent = password;
+        maskElement.classList.add('password-revealed');
+        button.innerHTML = '<i class="fas fa-eye-slash"></i>';
+    }
+}
+
+// Delete confirmation modal elements
+const deleteModal = document.getElementById("deleteConfirmModal");
+const cancelDeleteBtn = document.getElementById("cancelDelete");
+const confirmDeleteBtn = document.getElementById("confirmDelete");
+const closeDeleteModalBtn = document.getElementById("closeDeleteModal");
+let passwordToDeleteIndex = null;
+
+async function openDeleteModal(index) {
+    passwordToDeleteIndex = index;
+    const passwords = await getStoredPasswords();
+    const passwordToDelete = passwords[index];
+    
+    // Update modal text
+    const modalText = deleteModal.querySelector('p.text-gray-300');
+    modalText.textContent = `Are you sure you want to delete the password for ${passwordToDelete.site}?`;
+    
+    // Show modal with animation
+    deleteModal.classList.remove("opacity-0", "pointer-events-none");
+    deleteModal.classList.add("show");
+    document.body.style.overflow = 'hidden';
+}
+
+function closeDeleteModal() {
+    deleteModal.classList.remove("show");
+    deleteModal.classList.add("opacity-0", "pointer-events-none");
+    document.body.style.overflow = 'auto';
+    passwordToDeleteIndex = null;
+}
+
+function deletePassword(index) {
+    openDeleteModal(index);
+}
+
+async function performDelete() {
+    if (passwordToDeleteIndex === null) return;
+    
+    const passwords = await getStoredPasswords();
+    passwords.splice(passwordToDeleteIndex, 1);
+    await savePasswords(passwords);
+    renderTable();
+    closeDeleteModal();
+    showNotification('Password deleted successfully!', 'success');
+}
+
+// Event listeners for delete modal
+confirmDeleteBtn.addEventListener('click', performDelete);
+cancelDeleteBtn.addEventListener('click', closeDeleteModal);
+closeDeleteModalBtn.addEventListener('click', closeDeleteModal);
+
+deleteModal.addEventListener('click', (e) => {
+    if (e.target === deleteModal) {
+        closeDeleteModal();
+    }
+});
+
+// ==========================
+// Modal Management
+// ==========================
+const editModal = document.getElementById("editModal");
+const editSite = document.getElementById("editSite");
+const editUsername = document.getElementById("editUsername");
+const editPassword = document.getElementById("editPassword");
+let editingIndex = null;
+
+// Add Password Modal
+const addPasswordModal = document.getElementById("addPasswordModal");
+const addSite = document.getElementById("addSite");
+const addUsername = document.getElementById("addUsername");
+const addPasswordInput = document.getElementById("addPassword");
+
+function openAddPasswordModal() {
+    // Clear form fields
+    addSite.value = '';
+    addUsername.value = '';
+    addPasswordInput.value = '';
+    
+    // Show modal with animation
+    addPasswordModal.classList.remove("opacity-0", "pointer-events-none");
+    addPasswordModal.classList.add("show");
+    document.body.style.overflow = 'hidden';
+    
+    // Focus on first input
+    setTimeout(() => {
+        addSite.focus();
+    }, 300);
+}
+
+function closeAddPasswordModal() {
+    addPasswordModal.classList.remove("show");
+    addPasswordModal.classList.add("opacity-0", "pointer-events-none");
+    document.body.style.overflow = 'auto';
+}
+
+async function openEditModal(index) {
+    const passwords = await getStoredPasswords();
+    const entry = passwords[index];
+    editingIndex = index;
+    
+    editSite.value = entry.site || '';
+    editUsername.value = entry.username || '';
+    editPassword.value = entry.password || '';
+    
+    // Show modal with animation
+    editModal.classList.remove("opacity-0", "pointer-events-none");
+    editModal.classList.add("show");
+    document.body.style.overflow = 'hidden';
+    
+    // Focus on first input
+    setTimeout(() => {
+        editSite.focus();
+    }, 300);
+}
+
+function closeEditModal() {
+    editModal.classList.remove("show");
+    editModal.classList.add("opacity-0", "pointer-events-none");
+    document.body.style.overflow = 'auto';
+    editingIndex = null;
+}
+
+// Expiring Passwords Modal
+const expiringModal = document.getElementById("expiringModal");
+
+function openExpiringModal() {
+    const expiringPasswords = checkForExpiringPasswords();
+    renderExpiringPasswordsList(expiringPasswords);
+    
+    // Show modal with animation
+    expiringModal.classList.remove("opacity-0", "pointer-events-none");
+    expiringModal.classList.add("show");
+    document.body.style.overflow = 'hidden';
+}
+
+function closeExpiringModal() {
+    expiringModal.classList.remove("show");
+    expiringModal.classList.add("opacity-0", "pointer-events-none");
+    document.body.style.overflow = 'auto';
+}
+
+// ==========================
+// Export/Import Functions
+// ==========================
+async function exportPasswords() {
+    const passwords = await getStoredPasswords();
+    const dataStr = JSON.stringify(passwords, null, 2);
+    const dataBlob = new Blob([dataStr], {type: 'application/json'});
+    
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(dataBlob);
+    link.download = 'passvault-passwords.json';
+    link.click();
+    showNotification('Passwords exported successfully!', 'success');
+}
+
+function importPasswords() {
+    document.getElementById('importFile').click();
+}
+
+// Show import confirmation modal
+function showImportConfirmModal(passwordCount, onConfirm) {
+    // Set the password count in the modal
+    document.getElementById('importCount').textContent = passwordCount;
+    
+    // Get modal elements
+    const modal = document.getElementById('importConfirmModal');
+    const confirmBtn = document.getElementById('confirmImport');
+    const cancelBtn = document.getElementById('cancelImport');
+    const closeBtn = document.getElementById('closeImportModal');
+    
+    // Show modal with animation
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    
+    // Handle confirm
+    const handleConfirm = async () => {
+        // Hide modal
+        modal.classList.remove('show');
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        document.body.style.overflow = 'auto';
+        
+        // Remove event listeners
+        confirmBtn.removeEventListener('click', handleConfirm);
+        cancelBtn.removeEventListener('click', handleCancel);
+        closeBtn.removeEventListener('click', handleCancel);
+        
+        // Call the confirm callback
+        await onConfirm();
+    };
+    
+    // Handle cancel/close
+    const handleCancel = () => {
+        // Hide modal
+        modal.classList.remove('show');
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        document.body.style.overflow = 'auto';
+        
+        // Remove event listeners
+        confirmBtn.removeEventListener('click', handleConfirm);
+        cancelBtn.removeEventListener('click', handleCancel);
+        closeBtn.removeEventListener('click', handleCancel);
+    };
+    
+    // Add event listeners
+    confirmBtn.addEventListener('click', handleConfirm);
+    cancelBtn.addEventListener('click', handleCancel);
+    closeBtn.addEventListener('click', handleCancel);
+    
+    // Close modal when clicking outside
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            handleCancel();
+        }
+    });
+}
+
+// ==========================
+// Event Listeners
+// ==========================
+
+// Tab switching
+document.getElementById('randomTab').addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.option-section').forEach(section => section.classList.add('hidden'));
+    
+    document.getElementById('randomTab').classList.add('active');
+    document.getElementById('randomOptions').classList.remove('hidden');
+});
+
+document.getElementById('memorableTab').addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.option-section').forEach(section => section.classList.add('hidden'));
+    
+    document.getElementById('memorableTab').classList.add('active');
+    document.getElementById('memorableOptions').classList.remove('hidden');
+});
+
+document.getElementById('pinTab').addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.option-section').forEach(section => section.classList.add('hidden'));
+    
+    document.getElementById('pinTab').classList.add('active');
+    document.getElementById('pinOptions').classList.remove('hidden');
+});
+
+// Slider and input synchronization
+document.getElementById('randomLengthSlider').addEventListener('input', function() {
+    document.getElementById('randomLength').value = this.value;
+    document.getElementById('randomLengthValue').textContent = this.value;
+});
+
+document.getElementById('randomLength').addEventListener('input', function() {
+    let value = parseInt(this.value) || 16;
+    if (value < 4) value = 4;
+    if (value > 128) value = 128;
+    this.value = value;
+    document.getElementById('randomLengthSlider').value = value;
+    document.getElementById('randomLengthValue').textContent = value;
+});
+
+document.getElementById('memorableLengthSlider').addEventListener('input', function() {
+    document.getElementById('memorableLength').value = this.value;
+    document.getElementById('memorableLengthValue').textContent = this.value;
+});
+
+document.getElementById('memorableLength').addEventListener('input', function() {
+    let value = parseInt(this.value) || 4;
+    if (value < 2) value = 2;
+    if (value > 10) value = 10;
+    this.value = value;
+    document.getElementById('memorableLengthSlider').value = value;
+    document.getElementById('memorableLengthValue').textContent = value;
+});
+
+document.getElementById('pinLengthSlider').addEventListener('input', function() {
+    document.getElementById('pinLength').value = this.value;
+    document.getElementById('pinLengthValue').textContent = this.value;
+});
+
+document.getElementById('pinLength').addEventListener('input', function() {
+    let value = parseInt(this.value) || 6;
+    if (value < 3) value = 3;
+    if (value > 12) value = 12;
+    this.value = value;
+    document.getElementById('pinLengthSlider').value = value;
+    document.getElementById('pinLengthValue').textContent = value;
+});
+
+// ==========================
+// Initialize
+// ==========================
+document.addEventListener('DOMContentLoaded', async () => {
+  // Unlock application immediately (no master password required)
+  unlockApplication();
+  
+  // Render password table
+  await renderTable();
+  
+  // Set initial slider values
+  document.getElementById('randomLengthValue').textContent = document.getElementById('randomLength').value;
+  document.getElementById('memorableLengthValue').textContent = document.getElementById('memorableLength').value;
+  document.getElementById('pinLengthValue').textContent = document.getElementById('pinLength').value;
+  
+  // Check for expiring passwords on load
+  checkForExpiringPasswords();
+  
+  // Setup real-time password strength checking
+  setupPasswordStrengthCheck();
+});

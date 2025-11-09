@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PassVault - Advanced Password Manager">
+  <meta name="keywords" content="password, manager, vault">
+  <meta name="author" content="Mohamed Walid">
+  <title>PassVault - Advanced Password Manager</title>
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/logo12.png" type="image/png">
+  <!-- Static Assets Caching -->
+  <script defer src="static-cache.js"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+  <!-- Header -->
+  <header class="bg-gray-900/50 backdrop-blur-2xl p-4 shadow-2xl flex justify-between items-center sticky top-0 z-50 border-b border-gray-700/50 neon-header">
+  <div class="flex items-center space-x-4">
+    <!-- Animated MW Logo -->
+    <div class="logo-container relative">
+      <div class="mw-logo animate-pulse">
+        <span class="font-bold text-2xl bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-text-glow">MW</span>
+      </div>
+      <div class="logo-glow absolute inset-0 rounded-lg"></div>
+    </div>
+    <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-text-glow">PassVault</h1>
+  </div>
+
+  <!-- 🔸 Three-point button -->
+  <button id="menuToggle" class="text-white text-2xl md:hidden focus:outline-none">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <!-- 🔸 Hydra elements -->
+  <nav id="navbar" class="flex space-x-3 items-center md:flex hidden">
+    <a href="index.html" class="nav-link active">Generator</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <button id="themeToggle" class="nav-link">
+      <i class="fas fa-moon"></i>
+    </button>
+    <button id="logoutBtn" class="nav-link">Logout</button>
+  </nav>
+</header>
+
+
+  <!-- Expiration Notification Banner -->
+  <div id="expirationBanner" class="hidden bg-gradient-to-r from-amber-500 to-orange-600 text-white p-4 text-center relative neon-banner">
+    <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+      <div class="mb-2 md:mb-0">
+        <i class="fas fa-exclamation-triangle mr-2"></i>
+        <span id="expirationMessage">Some passwords need to be updated!</span>
+      </div>
+      <button id="viewExpiringBtn" class="bg-white text-orange-600 px-4 py-1 rounded-lg font-medium hover:bg-gray-100 transition-all neon-button">
+        View Details
+      </button>
+    </div>
+  </div>
+
+  <!-- Custom Notification Toast -->
+  <div id="notificationToast" class="fixed top-20 right-4 bg-gray-800/90 backdrop-blur-lg border border-gray-700 rounded-xl p-4 shadow-2xl z-50 transform transition-transform duration-300 translate-x-full">
+    <div class="flex items-center">
+      <i id="toastIcon" class="mr-3 text-lg"></i>
+      <span id="toastMessage" class="font-medium"></span>
+    </div>
+  </div>
+
+  <main class="container mx-auto px-4 py-8">
+    <!-- Hero Section -->
+    <section class="text-center mb-12 animate-fade-in">
+      <h1 class="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-text-glow neon-text hero-text">Advanced Password Generator</h1>
+      <p class="text-gray-400 max-w-3xl mx-auto text-lg">Create secure, unique passwords with our advanced password generator. Save and manage all your credentials.</p>
+    </section>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Password Generator Card -->
+      <div class="bg-gray-800/50 backdrop-blur-xl rounded-3xl shadow-2xl border border-gray-700/50 p-8 transition-all duration-500 neon-card">
+        <h2 class="text-3xl font-bold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-text-glow">Password Generator</h2>
+        
+        <!-- Password Type Tabs -->
+        <div class="mb-8">
+          <div class="flex border border-gray-600/50 rounded-xl overflow-hidden neon-tabs">
+            <button id="randomTab" class="tab-btn active flex-1 py-4 px-4 text-center">Random</button>
+            <button id="memorableTab" class="tab-btn flex-1 py-4 px-4 text-center">Memorable</button>
+            <button id="pinTab" class="tab-btn flex-1 py-4 px-4 text-center">PIN</button>
+          </div>
+        </div>
+
+        <!-- Generator Options -->
+        <div id="generatorOptions" class="space-y-8">
+          <!-- Random Password Options -->
+          <div id="randomOptions" class="option-section active">
+            <div class="flex justify-between items-center mb-6">
+              <label class="text-gray-300 text-lg">Length: <span id="randomLengthValue" class="font-bold text-cyan-400">16</span></label>
+              <div class="w-28">
+                <input type="number" id="randomLength" min="4" max="128" value="16" class="w-full bg-gray-700/50 border border-gray-600/50 rounded-xl px-3 py-2 text-center neon-input glowing-input">
+              </div>
+            </div>
+            <input type="range" id="randomLengthSlider" min="4" max="128" value="16" class="w-full h-3 bg-gray-700/50 rounded-xl appearance-none cursor-pointer neon-slider">
+            
+            <div class="grid grid-cols-2 gap-4 mt-6">
+              <div class="flex items-center p-3 rounded-xl bg-gray-700/30 border border-gray-600/30">
+                <input type="checkbox" id="includeUppercase" class="w-5 h-5 text-cyan-500 bg-gray-700/50 border-gray-600/50 rounded focus:ring-cyan-600 neon-checkbox" checked>
+                <label for="includeUppercase" class="ml-3 text-gray-300">Uppercase</label>
+              </div>
+              <div class="flex items-center p-3 rounded-xl bg-gray-700/30 border border-gray-600/30">
+                <input type="checkbox" id="includeLowercase" class="w-5 h-5 text-cyan-500 bg-gray-700/50 border-gray-600/50 rounded focus:ring-cyan-600 neon-checkbox" checked>
+                <label for="includeLowercase" class="ml-3 text-gray-300">Lowercase</label>
+              </div>
+              <div class="flex items-center p-3 rounded-xl bg-gray-700/30 border border-gray-600/30">
+                <input type="checkbox" id="includeNumbers" class="w-5 h-5 text-cyan-500 bg-gray-700/50 border-gray-600/50 rounded focus:ring-cyan-600 neon-checkbox" checked>
+                <label for="includeNumbers" class="ml-3 text-gray-300">Numbers</label>
+              </div>
+              <div class="flex items-center p-3 rounded-xl bg-gray-700/30 border border-gray-600/30">
+                <input type="checkbox" id="includeSymbols" class="w-5 h-5 text-cyan-500 bg-gray-700/50 border-gray-600/50 rounded focus:ring-cyan-600 neon-checkbox" checked>
+                <label for="includeSymbols" class="ml-3 text-gray-300">Symbols</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Memorable Password Options -->
+          <div id="memorableOptions" class="option-section hidden">
+            <div class="flex justify-between items-center mb-6">
+              <label class="text-gray-300 text-lg">Words: <span id="memorableLengthValue" class="font-bold text-cyan-400">4</span></label>
+              <div class="w-28">
+                <input type="number" id="memorableLength" min="2" max="10" value="4" class="w-full bg-gray-700/50 border border-gray-600/50 rounded-xl px-3 py-2 text-center neon-input">
+              </div>
+            </div>
+            <input type="range" id="memorableLengthSlider" min="2" max="10" value="4" class="w-full h-3 bg-gray-700/50 rounded-xl appearance-none cursor-pointer neon-slider">
+            
+            <div class="grid grid-cols-2 gap-4 mt-6">
+              <div class="flex items-center p-3 rounded-xl bg-gray-700/30 border border-gray-600/30">
+                <input type="checkbox" id="capitalizeWords" class="w-5 h-5 text-cyan-500 bg-gray-700/50 border-gray-600/50 rounded focus:ring-cyan-600 neon-checkbox" checked>
+                <label for="capitalizeWords" class="ml-3 text-gray-300">Capitalize</label>
+              </div>
+              <div class="flex items-center p-3 rounded-xl bg-gray-700/30 border border-gray-600/30">
+                <input type="checkbox" id="addNumbers" class="w-5 h-5 text-cyan-500 bg-gray-700/50 border-gray-600/50 rounded focus:ring-cyan-600 neon-checkbox">
+                <label for="addNumbers" class="ml-3 text-gray-300">Add Numbers</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- PIN Options -->
+          <div id="pinOptions" class="option-section hidden">
+            <div class="flex justify-between items-center mb-6">
+              <label class="text-gray-300 text-lg">Digits: <span id="pinLengthValue" class="font-bold text-cyan-400">6</span></label>
+              <div class="w-28">
+                <input type="number" id="pinLength" min="3" max="12" value="6" class="w-full bg-gray-700/50 border border-gray-600/50 rounded-xl px-3 py-2 text-center neon-input">
+              </div>
+            </div>
+            <input type="range" id="pinLengthSlider" min="3" max="12" value="6" class="w-full h-3 bg-gray-700/50 rounded-xl appearance-none cursor-pointer neon-slider">
+          </div>
+        </div>
+
+        <!-- Generate Button -->
+        <div class="mt-10">
+          <button id="generateBtn" class="w-full py-4 px-6 rounded-2xl font-bold text-white bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-700 hover:from-cyan-600 hover:via-blue-700 hover:to-purple-800 transition-all duration-500 shadow-2xl hover:shadow-cyan-500/30 transform hover:-translate-y-1 border border-cyan-400/30 neon-button-glow interactive-element hover-glow">
+            <i class="fas fa-bolt mr-3"></i>Generate Password
+          </button>
+        </div>
+      </div>
+
+      <!-- Generated Password Display -->
+      <div class="bg-gray-800/50 backdrop-blur-xl rounded-3xl shadow-2xl border border-gray-700/50 p-8 transition-all duration-500 neon-card">
+        <h2 class="text-3xl font-bold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-text-glow">Your Password</h2>
+        
+        <!-- Password Display -->
+        <div class="mb-8">
+          <div id="passwordDisplay" class="min-h-[80px] bg-gray-900/50 border-2 border-dashed border-gray-700/50 rounded-2xl p-5 flex items-center justify-center text-center font-mono text-xl break-all transition-all duration-500 neon-password-display interactive-element">
+            <span class="text-gray-500">Your generated password will appear here</span>
+          </div>
+        </div>
+
+        <!-- Password Actions -->
+        <div class="grid grid-cols-2 gap-5 mb-8">
+          <button id="copyBtn" class="py-4 px-5 rounded-2xl font-bold flex items-center justify-center bg-gray-700/50 hover:bg-gray-600/50 transition-all border border-gray-600/50 neon-button-glow-subtle interactive-element hover-glow">
+            <i class="far fa-copy mr-3"></i>Copy
+          </button>
+          <button id="saveBtn" class="py-4 px-5 rounded-2xl font-bold flex items-center justify-center bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 transition-all border border-green-400/30 neon-button-glow-subtle interactive-element hover-glow">
+            <i class="fas fa-save mr-3"></i>Save
+          </button>
+        </div>
+
+        <!-- Password Strength Meter -->
+        <div class="mb-8">
+          <div class="flex justify-between mb-3">
+            <span class="text-gray-400">Password Strength</span>
+            <span id="strengthText" class="font-bold">None</span>
+          </div>
+          <div class="h-4 bg-gray-700/50 rounded-full overflow-hidden">
+            <div id="strengthMeter" class="h-full rounded-full transition-all duration-700" style="width: 0%; background: linear-gradient(90deg, #ff4d4d, #ffcc00, #00ff88);"></div>
+          </div>
+        </div>
+
+        <!-- Security Tips -->
+        <div class="bg-gray-900/50 border border-gray-700/50 rounded-2xl p-5 neon-tips">
+          <h3 class="font-bold text-gray-300 mb-3 flex items-center">
+            <i class="fas fa-shield-alt mr-3 text-cyan-400"></i>Security Tips
+          </h3>
+          <ul class="text-sm text-gray-400 space-y-2">
+            <li class="flex items-start">
+              <i class="fas fa-lightbulb text-yellow-500 mt-1 mr-3 text-sm"></i>
+              <span>Use unique passwords for each account to prevent credential stuffing attacks</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-lightbulb text-yellow-500 mt-1 mr-3 text-sm"></i>
+              <span>Enable two-factor authentication (2FA) wherever possible for added security</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-lightbulb text-yellow-500 mt-1 mr-3 text-sm"></i>
+              <span>Regularly update passwords, especially after data breaches</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-lightbulb text-yellow-500 mt-1 mr-3 text-sm"></i>
+              <span>Avoid using personal information in passwords (names, birthdays, etc.)</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-lightbulb text-yellow-500 mt-1 mr-3 text-sm"></i>
+              <span>Use a password manager like PassVault to generate and store complex passwords</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Saved Passwords Table -->
+    <section class="mt-16 bg-gray-800/50 backdrop-blur-xl rounded-3xl shadow-2xl border border-gray-700/50 p-8 neon-card hover:neon-card-hover transition-all duration-500">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+        <h2 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-text-glow">Saved Passwords</h2>
+        <div class="flex flex-wrap gap-3">
+          <button id="exportBtn" class="py-3 px-5 rounded-xl font-medium flex items-center bg-gray-700/50 hover:bg-gray-600/50 transition-all border border-gray-600/50 neon-button-glow-subtle interactive-element hover-glow">
+            <i class="fas fa-file-export mr-2"></i>Export
+          </button>
+          <button id="importBtn" class="py-3 px-5 rounded-xl font-medium flex items-center bg-gray-700/50 hover:bg-gray-600/50 transition-all border border-gray-600/50 neon-button-glow-subtle interactive-element hover-glow">
+            <i class="fas fa-file-import mr-2"></i>Import
+          </button>
+        </div>
+      </div>
+      
+      <div class="overflow-x-auto rounded-2xl border border-gray-700/50">
+        <table id="passwordTable" class="w-full rounded-2xl overflow-hidden neon-table">
+          <thead class="bg-gray-700/80">
+            <tr>
+              <th class="py-4 px-5 text-left">Site</th>
+              <th class="py-4 px-5 text-left">Username</th>
+              <th class="py-4 px-5 text-left">Password</th>
+              <th class="py-4 px-5 text-left">Created</th>
+              <th class="py-4 px-5 text-left">Expires</th>
+              <th class="py-4 px-5 text-left">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-700/50">
+            <!-- Password rows will be dynamically inserted here -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mt-16 py-8 text-center text-gray-500 border-t border-gray-800/50">
+    <p>© 2025 PassVault - Advanced Password Manager. All rights reserved.</p>
+    <p class="text-sm mt-3">Your passwords are stored locally in your browser for your convenience.</p>
+    <!-- MW Company Link -->
+    <p class="text-sm mt-5">
+      Developed by <a href="https://pro-mw.github.io/Mohamed-Walid/" target="_blank" class="text-cyan-400 hover:text-cyan-300 transition-colors font-medium">MW</a>
+    </p>
+  </footer>
+
+  <script>
+    // Modern web application enhancements
+    console.log('PassVault initialized');
+
+    // Enhanced security measures
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      showNotification('Context menu disabled for security', 'warning');
+    });
+
+   
+
+    
+
+    // Disable dragging of elements
+    document.ondragstart = () => false;
+
+    // Disable text selection
+    document.onselectstart = () => false;
+
+    // Disable printing
+    document.onkeydown = (e) => {
+      if (e.ctrlKey && e.key === 'p') {
+        e.preventDefault();
+        showNotification('Printing disabled for security', 'warning');
+        return false;
+      }
+    };
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

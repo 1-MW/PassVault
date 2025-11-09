@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About PassVault - Advanced Password Manager">
+  <meta name="keywords" content="password, manager, vault, about">
+  <meta name="author" content="Mohamed Walid">
+  <title>PassVault - About</title>
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/logo12.png" type="image/png">
+  <!-- Static Assets Caching -->
+  <script defer src="static-cache.js"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+  <header class="bg-gray-900/50 backdrop-blur-2xl p-4 shadow-2xl flex justify-between items-center sticky top-0 z-50 border-b border-gray-700/50 neon-header">
+  <div class="flex items-center space-x-4">
+    <!-- Animated MW Logo -->
+    <div class="logo-container relative">
+      <div class="mw-logo animate-pulse">
+        <span class="font-bold text-2xl bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-text-glow">MW</span>
+      </div>
+      <div class="logo-glow absolute inset-0 rounded-lg"></div>
+    </div>
+    <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-text-glow">PassVault</h1>
+  </div>
+
+  <!-- 🔸 Three-point button -->
+  <button id="menuToggle" class="text-white text-2xl md:hidden focus:outline-none">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <!-- 🔸 Hydra elements -->
+  <nav id="navbar" class="flex space-x-3 items-center md:flex hidden">
+    <a href="index.html" class="nav-link">Generator</a>
+    <a href="about.html" class="nav-link active">About</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <button id="themeToggle" class="nav-link">
+      <i class="fas fa-moon"></i>
+    </button>
+    <button id="logoutBtn" class="nav-link">Logout</button>
+  </nav>
+</header>
+
+  <main class="container mx-auto px-4 py-8">
+    <!-- Hero Section -->
+    <section class="text-center mb-16 animate-fade-in">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-text-glow">About PassVault</h1>
+      <p class="text-gray-400 max-w-3xl mx-auto text-xl">The most advanced and secure password management solution for individuals and teams.</p>
+    </section>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-16">
+      <!-- Mission Card -->
+      <div class="bg-gray-800/50 backdrop-blur-xl rounded-3xl shadow-2xl border border-gray-700/50 p-8 neon-card hover:neon-card-hover transition-all duration-500">
+        <div class="flex items-center mb-6">
+          <div class="bg-cyan-500/20 p-4 rounded-2xl mr-5">
+            <i class="fas fa-bullseye text-cyan-400 text-3xl"></i>
+          </div>
+          <h2 class="text-3xl font-bold">Our Mission</h2>
+        </div>
+        <p class="text-gray-300 text-lg mb-5">
+          PassVault was created with a simple mission: to make the internet safer for everyone by providing 
+          the most secure and user-friendly password management solution available.
+        </p>
+        <p class="text-gray-300 text-lg">
+          We believe that strong security shouldn't compromise usability, and our advanced algorithms 
+          ensure that your digital life remains both protected and accessible.
+        </p>
+      </div>
+
+      <!-- Security Card -->
+      <div class="bg-gray-800/50 backdrop-blur-xl rounded-3xl shadow-2xl border border-gray-700/50 p-8 neon-card hover:neon-card-hover transition-all duration-500">
+        <div class="flex items-center mb-6">
+          <div class="bg-purple-500/20 p-4 rounded-2xl mr-5">
+            <i class="fas fa-shield-alt text-purple-400 text-3xl"></i>
+          </div>
+          <h2 class="text-3xl font-bold">Enterprise Security</h2>
+        </div>
+        <p class="text-gray-300 text-lg mb-5">
+          PassVault provides advanced features to manage your passwords. All data is stored 
+          locally on your device for your convenience.
+        </p>
+        <p class="text-gray-300 text-lg">
+          Our intuitive design means you have complete control over your password management experience.
+        </p>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="mb-16">
+      <h2 class="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-text-glow">Advanced Features</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div class="bg-gray-800/50 backdrop-blur-xl rounded-2xl border border-gray-700/50 p-7 hover:border-cyan-500/50 transition-all neon-card hover:neon-card-hover">
+          <div class="text-cyan-400 text-4xl mb-5">
+            <i class="fas fa-key"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-3">Advanced Generator</h3>
+          <p class="text-gray-400 text-lg">
+            Create secure passwords with customizable length and character sets. 
+            Our algorithm ensures strong password generation.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="bg-gray-800/50 backdrop-blur-xl rounded-2xl border border-gray-700/50 p-7 hover:border-cyan-500/50 transition-all neon-card hover:neon-card-hover">
+          <div class="text-green-400 text-4xl mb-5">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-3">Memorable Passwords</h3>
+          <p class="text-gray-400 text-lg">
+            Generate easy-to-remember passwords using our linguistic algorithm that creates 
+            pronounceable combinations with optional numbers and capitalization.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="bg-gray-800/50 backdrop-blur-xl rounded-2xl border border-gray-700/50 p-7 hover:border-cyan-500/50 transition-all neon-card hover:neon-card-hover">
+          <div class="text-purple-400 text-4xl mb-5">
+            <i class="fas fa-lock"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-3">Local Storage</h3>
+          <p class="text-gray-400 text-lg">
+            All your passwords are stored locally in your browser for easy access. 
+            Your data stays on your device for convenience.
+          </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="bg-gray-800/50 backdrop-blur-xl rounded-2xl border border-gray-700/50 p-7 hover:border-cyan-500/50 transition-all neon-card hover:neon-card-hover">
+          <div class="text-yellow-400 text-4xl mb-5">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-3">Instant Strength</h3>
+          <p class="text-gray-400 text-lg">
+            Real-time password strength analysis with detailed feedback. Understand exactly how 
+            secure your passwords are and how to improve them.
+          </p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="bg-gray-800/50 backdrop-blur-xl rounded-2xl border border-gray-700/50 p-7 hover:border-cyan-500/50 transition-all neon-card hover:neon-card-hover">
+          <div class="text-red-400 text-4xl mb-5">
+            <i class="fas fa-sync"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-3">Easy Import/Export</h3>
+          <p class="text-gray-400 text-lg">
+            Seamlessly import passwords from other managers or export your data for backup. 
+            Full control over your information in standard JSON format.
+          </p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="bg-gray-800/50 backdrop-blur-xl rounded-2xl border border-gray-700/50 p-7 hover:border-cyan-500/50 transition-all neon-card hover:neon-card-hover">
+          <div class="text-cyan-400 text-4xl mb-5">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-3">Responsive Design</h3>
+          <p class="text-gray-400 text-lg">
+            Access your password manager from any device. Our modern interface adapts to desktop, 
+            tablet, and mobile screens for ultimate convenience.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="mb-16">
+      <h2 class="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-text-glow">How It Works</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="bg-gray-800/50 backdrop-blur-xl rounded-2xl border border-gray-700/50 p-7 mb-6 neon-card hover:neon-card-hover transition-all">
+            <div class="bg-cyan-500/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-5">
+              <span class="text-3xl font-bold text-cyan-400">1</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-3">Generate</h3>
+            <p class="text-gray-400">Create strong, unique passwords with our advanced generator</p>
+          </div>
+        </div>
+        
+        <div class="text-center">
+          <div class="bg-gray-800/50 backdrop-blur-xl rounded-2xl border border-gray-700/50 p-7 mb-6 neon-card hover:neon-card-hover transition-all">
+            <div class="bg-purple-500/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-5">
+              <span class="text-3xl font-bold text-purple-400">2</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-3">Save</h3>
+            <p class="text-gray-400">Store passwords securely with site names and usernames</p>
+          </div>
+        </div>
+        
+        <div class="text-center">
+          <div class="bg-gray-800/50 backdrop-blur-xl rounded-2xl border border-gray-700/50 p-7 mb-6 neon-card hover:neon-card-hover transition-all">
+            <div class="bg-green-500/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-5">
+              <span class="text-3xl font-bold text-green-400">3</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-3">Manage</h3>
+            <p class="text-gray-400">View, edit, and organize all your passwords in one place</p>
+          </div>
+        </div>
+        
+        <div class="text-center">
+          <div class="bg-gray-800/50 backdrop-blur-xl rounded-2xl border border-gray-700/50 p-7 mb-6 neon-card hover:neon-card-hover transition-all">
+            <div class="bg-amber-500/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-5">
+              <span class="text-3xl font-bold text-amber-400">4</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-3">Secure</h3>
+            <p class="text-gray-400">Enjoy peace of mind with advanced local encryption</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Security Commitment -->
+    <section class="bg-gradient-to-r from-gray-800/50 to-gray-900/50 backdrop-blur-xl rounded-3xl border border-gray-700/50 p-10 mb-16 neon-card hover:neon-card-hover transition-all">
+      <div class="text-center max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-text-glow">Our Security Commitment</h2>
+        <p class="text-gray-300 text-xl mb-8">
+          At PassVault, we prioritize your security above all else. Our zero-knowledge architecture 
+          ensures that your passwords are encrypted with AES-256-GCM encryption locally 
+          before storage, and we never transmit unencrypted data over the internet.
+        </p>
+        <div class="flex flex-wrap justify-center gap-5">
+          <span class="bg-cyan-500/20 text-cyan-300 px-6 py-3 rounded-full text-lg">AES-256-GCM Encryption</span>
+          <span class="bg-purple-500/20 text-purple-300 px-6 py-3 rounded-full text-lg">Zero-Knowledge Architecture</span>
+          <span class="bg-green-500/20 text-green-300 px-6 py-3 rounded-full text-lg">Local Storage Only</span>
+          <span class="bg-amber-500/20 text-amber-300 px-6 py-3 rounded-full text-lg">No External Transmission</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Community Section -->
+  <section class="bg-gradient-to-r from-gray-800/50 to-gray-900/50 backdrop-blur-xl rounded-3xl border border-gray-700/50 p-10 mb-16 neon-card hover:neon-card-hover transition-all">
+    <div class="text-center max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-text-glow">Get In Touch</h2>
+      
+      <!-- Support -->
+      <div class="flex flex-wrap justify-center gap-5">
+        <a href="https://pro-mw.github.io/Mohamed-Walid/" target="_blank" class="bg-gray-700/50 hover:bg-gray-600/50 px-8 py-4 rounded-2xl flex items-center transition-all neon-button-glow-subtle">
+          <img src="assets/logo.png" alt="Website" class="w-6 h-6 mr-3">
+          <span class="text-lg">Website</span>
+        </a>
+        <a href="https://www.linkedin.com/in/mohamed-walid-18b29a395?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="bg-cyan-600/50 hover:bg-cyan-500/50 px-8 py-4 rounded-2xl flex items-center transition-all neon-button-glow-subtle">
+          <i class="fab fa-linkedin-in text-2xl mr-3"></i>
+          <span class="text-lg">LinkedIn</span>
+        </a>
+        <a href="https://www.facebook.com/mohamed.bader.90834776?mibextid=ZbWKwL" target="_blank" class="bg-blue-600/50 hover:bg-blue-500/50 px-8 py-4 rounded-2xl flex items-center transition-all neon-button-glow-subtle">
+          <i class="fab fa-facebook-f text-2xl mr-3"></i>
+          <span class="text-lg">Facebook</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="mt-16 py-8 text-center text-gray-500 border-t border-gray-800/50">
+    <p>© 2025 PassVault - Advanced Password Manager. All rights reserved.</p>
+    <p class="text-sm mt-3">Your passwords are stored locally in your browser for your convenience.</p>
+    <!-- MW Company Link -->
+    <p class="text-sm mt-5">
+      Developed by <a href="https://pro-mw.github.io/Mohamed-Walid/" target="_blank" class="text-cyan-400 hover:text-cyan-300 transition-colors font-medium">MW</a>
+    </p>
+  </footer>
+
+  <script>
+    // Enhanced security measures
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      showNotification('Context menu disabled for security', 'warning');
+    });
+
+    // Disable developer tools access
+    const disableDevTools = (e) => {
+      if (
+        e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+        (e.ctrlKey && e.key === 'U')
+      ) {
+        e.preventDefault();
+        showNotification('Developer tools access restricted', 'warning');
+        return false;
+      }
+    };
+
+    document.addEventListener('keydown', disableDevTools);
+
+    // Disable dragging of elements
+    document.ondragstart = () => false;
+
+    // Disable text selection
+    document.onselectstart = () => false;
+
+    // Disable printing
+    document.onkeydown = (e) => {
+      if (e.ctrlKey && e.key === 'p') {
+        e.preventDefault();
+        showNotification('Printing disabled for security', 'warning');
+        return false;
+      }
+    };
+
+    // Logout functionality
+    if (document.getElementById('logoutBtn')) {
+      document.getElementById('logoutBtn').addEventListener('click', () => {
+        // Lock application on all pages
+        const lockOverlay = document.getElementById('lockOverlay');
+        if (!lockOverlay) {
+          const overlay = document.createElement('div');
+          overlay.id = 'lockOverlay';
+          overlay.className = 'fixed inset-0 bg-gray-900 flex items-center justify-center z-50';
+          overlay.innerHTML = `
+            <div class="text-center p-8 rounded-3xl bg-gray-800/50 backdrop-blur-xl border border-gray-700/50 neon-modal">
+              <h2 class="text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-text-glow">Locked</h2>
+              <p class="text-gray-300 text-xl mb-8">Please authenticate to access your passwords</p>
+              <button id="unlockAppBtn" class="px-6 py-3 rounded-xl font-bold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 transition-all neon-button-glow">
+                Unlock
+              </button>
+            </div>
+          `;
+          document.body.appendChild(overlay);
+          
+          document.getElementById('unlockAppBtn').addEventListener('click', () => {
+            window.location.href = 'index.html';
+          });
+        }
+      });
+    }
+
+
+    const menuToggle = document.getElementById("menuToggle");
+  const navbar = document.getElementById("navbar");
+
+  menuToggle.addEventListener("click", () => {
+    navbar.classList.toggle("show");
+  });
+  
+  </script>
+  <script src="simple-script.js"></script>
+  
+</body>
+</html>

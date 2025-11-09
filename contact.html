@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact PassVault - Advanced Password Manager Support">
+  <meta name="keywords" content="password, manager, vault, contact, support">
+  <meta name="author" content="Mohamed Walid">
+  <title>PassVault - Contact</title>
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/logo12.png" type="image/png">
+  <!-- Static Assets Caching -->
+  <script defer src="static-cache.js"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+  <header class="bg-gray-900/50 backdrop-blur-2xl p-4 shadow-2xl flex justify-between items-center sticky top-0 z-50 border-b border-gray-700/50 neon-header">
+  <div class="flex items-center space-x-4">
+    <!-- Animated MW Logo -->
+    <div class="logo-container relative">
+      <div class="mw-logo animate-pulse">
+        <span class="font-bold text-2xl bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-text-glow">MW</span>
+      </div>
+      <div class="logo-glow absolute inset-0 rounded-lg"></div>
+    </div>
+    <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-text-glow">PassVault</h1>
+  </div>
+
+  <!-- 🔸 Three-point button -->
+  <button id="menuToggle" class="text-white text-2xl md:hidden focus:outline-none">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <!-- 🔸 Hydra elements -->
+  <nav id="navbar" class="flex space-x-3 items-center md:flex hidden">
+    <a href="index.html" class="nav-link">Generator</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="contact.html" class="nav-link active">Contact</a>
+    <button id="themeToggle" class="nav-link">
+      <i class="fas fa-moon"></i>
+    </button>
+    <button id="logoutBtn" class="nav-link">Logout</button>
+  </nav>
+</header>
+
+  <main class="container mx-auto px-4 py-8">
+    <!-- Hero Section -->
+    <section class="text-center mb-16 animate-fade-in">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-text-glow">Contact Us</h1>
+      <p class="text-gray-400 max-w-3xl mx-auto text-xl">Have questions or feedback? We're here to help make your password management experience better.</p>
+    </section>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-16">
+      <!-- Contact Information -->
+      <div class="bg-gray-800/50 backdrop-blur-xl rounded-3xl shadow-2xl border border-gray-700/50 p-8 transition-all duration-500 neon-card hover:neon-card-hover">
+        <h2 class="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-text-glow">Get In Touch</h2>
+        
+        <!-- Support -->
+        <div class="flex items-start">
+          <div class="bg-cyan-500/20 p-4 rounded-2xl mr-5">
+            <i class="fas fa-headset text-cyan-400 text-2xl"></i>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-2">Support</h3>
+            <p class="text-gray-400 mb-3">Need help with PassVault?</p>
+            <p class="text-cyan-400 text-lg"><a href="mailto:contact.mw.sec@gmail.com?" class="hover:text-cyan-300 transition-colors">support@passvault.app</a></p>
+          </div>
+        </div>
+        
+        <!-- Security -->
+        <div class="flex items-start">
+          <div class="bg-purple-500/20 p-4 rounded-2xl mr-5">
+            <i class="fas fa-shield-alt text-purple-400 text-2xl"></i>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-2">Technical Support</h3>
+            <p class="text-gray-400 mb-3">Technical issues and support</p>
+            <p class="text-cyan-400 text-lg"><a href="mailto:contact.mw.sec@gmail.com?" class="hover:text-cyan-300 transition-colors">support@passvault.app</a></p>
+          </div>
+        </div>
+        
+        <!-- Feedback -->
+        <div class="flex items-start">
+          <div class="bg-green-500/20 p-4 rounded-2xl mr-5">
+            <i class="fas fa-comment-dots text-green-400 text-2xl"></i>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-2">Feedback</h3>
+            <p class="text-gray-400 mb-3">Suggestions and feature requests</p>
+            <p class="text-cyan-400 text-lg"><a href="mailto:contact.mw.sec@gmail.com?" class="hover:text-cyan-300 transition-colors">feedback@passvault.app</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="bg-gray-800/50 backdrop-blur-xl rounded-3xl shadow-2xl border border-gray-700/50 p-8 transition-all duration-500 neon-card hover:neon-card-hover">
+        <h2 class="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-text-glow">Frequently Asked Questions</h2>
+        
+        <div class="space-y-8">
+          <!-- FAQ 1 -->
+          <div class="border-b border-gray-700/50 pb-6">
+            <h3 class="font-bold text-xl mb-3 flex items-center">
+              <i class="fas fa-question-circle text-cyan-400 mr-3"></i>
+              Where are my passwords stored?
+            </h3>
+            <p class="text-gray-400 text-lg">
+              Your passwords are stored locally in your browser's secure storage. They never leave your device 
+              and are encrypted before storage. No data is transmitted to any servers.
+            </p>
+          </div>
+          
+          <!-- FAQ 2 -->
+          <div class="border-b border-gray-700/50 pb-6">
+            <h3 class="font-bold text-xl mb-3 flex items-center">
+              <i class="fas fa-question-circle text-cyan-400 mr-3"></i>
+              How does PassVault work?
+            </h3>
+            <p class="text-gray-400 text-lg">
+              PassVault generates strong passwords and stores them locally in your browser. 
+              Your data stays on your device for easy access and convenience.
+            </p>
+          </div>
+          
+          <!-- FAQ 3 -->
+          <div class="border-b border-gray-700/50 pb-6">
+            <h3 class="font-bold text-xl mb-3 flex items-center">
+              <i class="fas fa-question-circle text-cyan-400 mr-3"></i>
+              Can I sync passwords between devices?
+            </h3>
+            <p class="text-gray-400 text-lg">
+              Currently, PassVault stores passwords locally. However, you can export your passwords as a JSON 
+              file and import them on other devices for manual syncing.
+            </p>
+          </div>
+          
+          <!-- FAQ 4 -->
+          <div>
+            <h3 class="font-bold text-xl mb-3 flex items-center">
+              <i class="fas fa-question-circle text-cyan-400 mr-3"></i>
+              Is PassVault free to use?
+            </h3>
+            <p class="text-gray-400 text-lg">
+              Yes, PassVault is completely free and open-source. We believe strong security should be 
+              accessible to everyone without cost.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Community Section -->
+    <section class="bg-gradient-to-r from-gray-800/50 to-gray-900/50 backdrop-blur-xl rounded-3xl border border-gray-700/50 p-10 mb-16 neon-card hover:neon-card-hover transition-all">
+      <div class="text-center max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-text-glow">Join Our Community</h2>
+        <p class="text-gray-300 text-xl mb-8">
+          Connect with other security-conscious users, share tips, and stay updated on the latest 
+          features and security improvements.
+        </p>
+        <div class="flex flex-wrap justify-center gap-5">
+          <a href="https://pro-mw.github.io/Mohamed-Walid/" target="_blank" class="bg-gray-700/50 hover:bg-gray-600/50 px-8 py-4 rounded-2xl flex items-center transition-all neon-button-glow-subtle">
+            <img src="assets/logo.png" alt="Website" class="w-6 h-6 mr-3">
+            <span class="text-lg">Website</span>
+          </a>
+          <a href="https://www.linkedin.com/in/mohamed-walid-18b29a395?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="bg-cyan-600/50 hover:bg-cyan-500/50 px-8 py-4 rounded-2xl flex items-center transition-all neon-button-glow-subtle">
+            <i class="fab fa-linkedin-in text-2xl mr-3"></i>
+            <span class="text-lg">LinkedIn</span>
+          </a>
+          <a href="https://www.facebook.com/mohamed.bader.90834776?mibextid=ZbWKwL" target="_blank" class="bg-blue-600/50 hover:bg-blue-500/50 px-8 py-4 rounded-2xl flex items-center transition-all neon-button-glow-subtle">
+            <i class="fab fa-facebook-f text-2xl mr-3"></i>
+            <span class="text-lg">Facebook</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mt-16 py-8 text-center text-gray-500 border-t border-gray-800/50">
+    <p>© 2025 PassVault - Advanced Password Manager. All rights reserved.</p>
+    <p class="text-sm mt-3">Your passwords are stored locally in your browser for your convenience.</p>
+    <!-- MW Company Link -->
+    <p class="text-sm mt-5">
+      Developed by <a href="https://pro-mw.github.io/Mohamed-Walid/" target="_blank" class="text-cyan-400 hover:text-cyan-300 transition-colors font-medium">MW</a>
+    </p>
+  </footer>
+
+  <script>
+    // Enhanced security measures
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      showNotification('Context menu disabled for security', 'warning');
+    });
+
+    // Disable developer tools access
+    const disableDevTools = (e) => {
+      if (
+        e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+        (e.ctrlKey && e.key === 'U')
+      ) {
+        e.preventDefault();
+        showNotification('Developer tools access restricted', 'warning');
+        return false;
+      }
+    };
+
+    document.addEventListener('keydown', disableDevTools);
+
+    // Disable dragging of elements
+    document.ondragstart = () => false;
+
+    // Disable text selection
+    document.onselectstart = () => false;
+
+    // Disable printing
+    document.onkeydown = (e) => {
+      if (e.ctrlKey && e.key === 'p') {
+        e.preventDefault();
+        showNotification('Printing disabled for security', 'warning');
+        return false;
+      }
+    };
+
+    // Handle email links with fallback
+    document.addEventListener('DOMContentLoaded', function() {
+      const emailLinks = document.querySelectorAll('a[href^="mailto:contact.mw.sec@gmail.com"]');
+      
+      emailLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          // Try to open mailto link
+          setTimeout(() => {
+            // Fallback: Open Gmail in browser if mailto didn't work
+            window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=contact.mw.sec@gmail.com&su=${encodeURIComponent(this.href.split('subject=')[1] || '')}`, '_blank');
+          }, 1000);
+        });
+      });
+    });
+
+    // Logout functionality
+    if (document.getElementById('logoutBtn')) {
+      document.getElementById('logoutBtn').addEventListener('click', () => {
+        // Lock application on all pages
+        const lockOverlay = document.getElementById('lockOverlay');
+        if (!lockOverlay) {
+          const overlay = document.createElement('div');
+          overlay.id = 'lockOverlay';
+          overlay.className = 'fixed inset-0 bg-gray-900 flex items-center justify-center z-50';
+          overlay.innerHTML = `
+            <div class="text-center p-8 rounded-3xl bg-gray-800/50 backdrop-blur-xl border border-gray-700/50 neon-modal">
+              <h2 class="text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-text-glow">Locked</h2>
+              <p class="text-gray-300 text-xl mb-8">Please authenticate to access your passwords</p>
+              <button id="unlockAppBtn" class="px-6 py-3 rounded-xl font-bold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 transition-all neon-button-glow">
+                Unlock
+              </button>
+            </div>
+          `;
+          document.body.appendChild(overlay);
+          
+          document.getElementById('unlockAppBtn').addEventListener('click', () => {
+            window.location.href = 'index.html';
+          });
+        }
+      });
+    }
+
+
+    const menuToggle = document.getElementById("menuToggle");
+  const navbar = document.getElementById("navbar");
+
+  menuToggle.addEventListener("click", () => {
+    navbar.classList.toggle("show");
+  });
+  
+  </script>
+  <script src="simple-script.js"></script>  
+</body>
+</html>

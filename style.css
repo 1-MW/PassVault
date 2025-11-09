@@ -1,0 +1,1210 @@
+/* =====================================
+   🌈 Modern Futuristic UI - PassVault
+   Author: Mohamed Waleed (MR Zero)
+===================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --primary-gradient: linear-gradient(135deg, #00eeff, #0077ff, #00eeff);
+  --secondary-gradient: linear-gradient(135deg, #f093fb, #f5576c, #f093fb);
+  --accent-gradient: linear-gradient(135deg, #43e97b, #38f9d7, #43e97b);
+  --warning-gradient: linear-gradient(135deg, #f59e0b, #ea580c, #f59e0b);
+  --neon-cyan: #00eeff;
+  --neon-blue: #0077ff;
+  --neon-purple: #8a2be2;
+  --glass-bg: rgba(30, 30, 46, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --dark-bg: #0a0a14;
+  --light-bg: #f0f0f5;
+  --dark-text: #1a1a2e;
+  --light-text: #f0f0f5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform: translateZ(0);
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  color: #e4e4e4;
+  min-height: 100vh;
+  background-attachment: fixed;
+  overflow-x: hidden;
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+/* ================= DARK/LIGHT THEME ================= */
+body.light-theme {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e7f1 100%);
+  color: #000000;
+}
+
+/* Make all text elements black in light mode */
+body.light-theme p,
+body.light-theme h1,
+body.light-theme h2,
+body.light-theme h3,
+body.light-theme h4,
+body.light-theme h5,
+body.light-theme h6,
+body.light-theme span,
+body.light-theme a,
+body.light-theme button,
+body.light-theme td,
+body.light-theme th,
+body.light-theme label,
+body.light-theme input,
+body.light-theme textarea,
+body.light-theme select,
+body.light-theme li,
+body.light-theme div {
+  color: #000000 !important;
+}
+
+body.light-theme .neon-header {
+  background: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid rgba(0, 119, 255, 0.2);
+}
+
+body.light-theme .neon-card {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .neon-input {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #000000;
+}
+
+body.light-theme .neon-password-display {
+  background: rgba(245, 245, 255, 0.8);
+  border: 2px dashed rgba(0, 119, 255, 0.3);
+  color: #000000;
+}
+
+
+/* ================= ANIMATIONS ================= */
+
+/* ================= SMOOTH TRANSITIONS ================= */
+.smooth-transition {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* ================= INTERACTIVE ELEMENTS ================= */
+.interactive-element {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.interactive-element::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.interactive-element:hover::before {
+  left: 100%;
+}
+
+.interactive-element:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 238, 255, 0.2);
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+
+
+
+
+
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes textGlow {
+  0% {
+    color: #ffffff;
+    text-shadow: 0 0 1px #00b3cc, 0 0 2px #00b3cc, 0 0 3px #00b3cc, 0 0 4px #00e6ff;
+  }
+  50% {
+    color: #ffffff;
+    text-shadow: 0 0 1.5px #00b3cc, 0 0 3px #00b3cc, 0 0 4.5px #00b3cc, 0 0 6px #00e6ff;
+  }
+  100% {
+    color: #ffffff;
+    text-shadow: 0 0 1px #00b3cc, 0 0 2px #00b3cc, 0 0 3px #00b3cc, 0 0 4px #00e6ff;
+  }
+}
+
+
+@keyframes neonFlicker {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes electricGlow {
+  0% {
+    box-shadow: 0 0 5px #00eeff;
+  }
+  50% {
+    box-shadow: 0 0 20px #00eeff, 0 0 30px #0077ff;
+  }
+  100% {
+    box-shadow: 0 0 5px #00eeff;
+  }
+}
+
+@keyframes neonPulse {
+  0% {
+    text-shadow: 0 0 5px var(--neon-cyan), 0 0 10px var(--neon-cyan);
+  }
+  50% {
+    text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan), 0 0 30px var(--neon-blue);
+  }
+  100% {
+    text-shadow: 0 0 5px var(--neon-cyan), 0 0 10px var(--neon-cyan);
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 100, 100, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(255, 100, 100, 0.8), 0 0 30px rgba(255, 100, 100, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(255, 100, 100, 0.5);
+  }
+}
+
+/* ================= GLASSMORPHISM EFFECTS ================= */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.glass-effect:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 238, 255, 0.2);
+}
+
+
+
+/* ================= HEADER ================= */
+.neon-header {
+  background: rgba(15, 15, 25, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 238, 255, 0.2);
+  box-shadow: 0 0 20px rgba(0, 238, 255, 0.1);
+  animation: fadeIn 0.8s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.neon-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 238, 255, 0.05), rgba(0, 119, 255, 0.05));
+  pointer-events: none;
+  z-index: -1;
+}
+
+.neon-header.light-theme {
+  background: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid rgba(0, 119, 255, 0.2);
+  box-shadow: 0 0 20px rgba(0, 119, 255, 0.1);
+}
+
+.neon-header.light-theme::before {
+  background: linear-gradient(135deg, rgba(0, 238, 255, 0.1), rgba(0, 119, 255, 0.1));
+}
+
+.mw-logo {
+  position: relative;
+  z-index: 2;
+  animation: float 3s ease-in-out infinite;
+}
+
+.logo-glow {
+  z-index: 1;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 238, 255, 0.5),
+              0 0 20px rgba(0, 238, 255, 0.3),
+              0 0 30px rgba(0, 238, 255, 0.2);
+}
+
+.animate-text-glow {
+  animation: textGlow 3s infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.neon-text {
+  animation: textGlow 3s infinite;
+}
+
+.hero-text {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ================= NAVIGATION ================= */
+.nav-link {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 12px 20px;
+  color: #ccc;
+  font-weight: 500;
+  text-decoration: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0); /* Enable GPU acceleration */
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 238, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.nav-link:hover::before {
+  left: 100%;
+}
+
+.nav-link:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 15px rgba(0, 238, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+
+
+.nav-link.active {
+  background: rgba(0, 238, 255, 0.2);
+  color: #00eeff;
+  font-weight: 600;
+  box-shadow: 0 0 15px rgba(0, 238, 255, 0.3);
+}
+
+/* ================= EXPIRATION BANNER ================= */
+.neon-banner {
+  background: linear-gradient(90deg, #f59e0b, #ea580c);
+  color: white;
+  padding: 1.2rem;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 16px 16px;
+}
+
+.neon-banner button {
+  background: white;
+  color: #ea580c;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.neon-banner button:hover {
+  background: #f3f4f6;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ================= NOTIFICATION TOAST ================= */
+#notificationToast {
+  background: rgba(30, 30, 46, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 238, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 238, 255, 0.2);
+  transform: translateZ(0); /* Enable GPU acceleration */
+  border-radius: 16px;
+  /* Start position - peeking from right edge */
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+#notificationToast.show {
+  transform: translateX(0);
+}
+
+#notificationToast.hide {
+  transform: translateX(110%);
+}
+
+/* Slide-in animation for notifications */
+@keyframes slideInNotification {
+  0% {
+    transform: translateX(100%) scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(-10%) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Slide-out animation for notifications */
+@keyframes slideOutNotification {
+  0% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(110%) scale(0.8);
+    opacity: 0;
+  }
+}
+
+/* Success notification */
+#notificationToast.bg-green-900\/90 {
+  box-shadow: 0 0 25px rgba(0, 204, 102, 0.5);
+  border: 1px solid rgba(0, 204, 102, 0.5);
+}
+
+/* Warning notification */
+#notificationToast.bg-yellow-900\/90 {
+  box-shadow: 0 0 25px rgba(255, 153, 0, 0.5);
+  border: 1px solid rgba(255, 153, 0, 0.5);
+}
+
+/* Error notification */
+#notificationToast.bg-red-900\/90 {
+  box-shadow: 0 0 25px rgba(255, 77, 77, 0.5);
+  border: 1px solid rgba(255, 77, 77, 0.5);
+}
+
+/* Info notification */
+#notificationToast:not(.bg-green-900\/90):not(.bg-yellow-900\/90):not(.bg-red-900\/90) {
+  box-shadow: 0 0 25px rgba(0, 119, 255, 0.5);
+  border: 1px solid rgba(0, 119, 255, 0.5);
+}
+
+/* ================= TABS ================= */
+.neon-tabs {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  color: #aaa;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  font-size: 1.1rem;
+  transform: translateZ(0); /* Enable GPU acceleration */
+}
+
+.tab-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.tab-btn:hover::before {
+  left: 100%;
+}
+
+.tab-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 0 10px rgba(0, 238, 255, 0.1);
+}
+
+.tab-btn.active {
+  background: rgba(0, 238, 255, 0.2);
+  color: #00eeff;
+  font-weight: 600;
+  box-shadow: inset 0 0 15px rgba(0, 238, 255, 0.2);
+}
+
+/* ================= CARD STYLES ================= */
+.neon-card {
+  background: rgba(20, 20, 35, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform: translateZ(0); /* Enable GPU acceleration */
+}
+
+.neon-card-hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 238, 255, 0.2);
+  border-color: rgba(0, 238, 255, 0.3);
+}
+
+.neon-card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 238, 255, 0.2);
+  border-color: rgba(0, 238, 255, 0.3);
+}
+
+
+.rounded-3xl {
+  border-radius: 24px;
+}
+
+.rounded-2xl {
+  border-radius: 16px;
+}
+
+/* ================= INPUTS ================= */
+.neon-input {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #fff;
+  padding: 12px 16px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  transform: translateZ(0); /* Enable GPU acceleration */
+}
+
+.neon-input:focus {
+  outline: none;
+  border-color: #00eeff;
+  box-shadow: 0 0 0 3px rgba(0, 238, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.neon-input:hover {
+  border-color: rgba(0, 238, 255, 0.5);
+  box-shadow: 0 0 10px rgba(0, 238, 255, 0.1);
+}
+
+input[type="range"].neon-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 12px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+  transform: translateZ(0); /* Enable GPU acceleration */
+}
+
+input[type="range"].neon-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #00eeff;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(0, 238, 255, 0.8);
+  border: 2px solid #fff;
+  transition: all 0.3s ease;
+  transform: translateZ(0); /* Enable GPU acceleration */
+}
+
+input[type="range"].neon-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(0, 238, 255, 1);
+}
+
+input[type="range"].neon-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #00eeff;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 15px rgba(0, 238, 255, 0.8);
+  transition: all 0.3s ease;
+  transform: translateZ(0); /* Enable GPU acceleration */
+}
+
+.neon-checkbox {
+  accent-color: #00eeff;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  transform: translateZ(0); /* Enable GPU acceleration */
+}
+
+/* ================= PASSWORD GENERATE INPUT GLOW ================= */
+.glowing-input {
+  animation: glow-pulse 2s infinite;
+  border: 1px solid rgba(0, 238, 255, 0.5);
+  box-shadow: 0 0 5px rgba(0, 238, 255, 0.5),
+              0 0 10px rgba(0, 238, 255, 0.3);
+}
+
+@keyframes glow-pulse {
+  0% {
+    box-shadow: 0 0 5px rgba(0, 238, 255, 0.5),
+                0 0 10px rgba(0, 238, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(0, 238, 255, 0.8),
+                0 0 20px rgba(0, 238, 255, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(0, 238, 255, 0.5),
+                0 0 10px rgba(0, 238, 255, 0.3);
+  }
+}
+
+/* ================= PASSWORD DISPLAY ================= */
+.neon-password-display {
+  min-height: 90px;
+  background: rgba(10, 10, 20, 0.9); /* Darker background for better contrast */
+  border: 2px dashed rgba(0, 238, 255, 0.2);
+  border-radius: 16px;
+  padding: 25px;
+  font-family: 'Fira Code', monospace;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  word-break: break-all;
+  transition: all 0.4s ease;
+  box-shadow: 
+    inset 0 0 15px rgba(0, 238, 255, 0.3),
+    0 0 10px rgba(0, 238, 255, 0.1);
+  transform: translateZ(0); /* Enable GPU acceleration */
+  color: #e4e4e4; /* Ensure text readability */
+  position: relative;
+  overflow: hidden;
+}
+
+.neon-password-display::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 238, 255, 0.05), rgba(0, 119, 255, 0.05));
+  pointer-events: none;
+  z-index: -1;
+  border-radius: 14px; /* Slightly smaller than border-radius of parent */
+}
+
+.neon-password-display:hover {
+  box-shadow: 
+    inset 0 0 20px rgba(0, 238, 255, 0.4),
+    0 0 15px rgba(0, 238, 255, 0.2);
+  border-color: rgba(0, 238, 255, 0.4);
+}
+
+.neon-password-display:active, .neon-password-display:focus-within {
+  border-color: #00eeff;
+  box-shadow: 
+    inset 0 0 25px rgba(0, 238, 255, 0.5),
+    0 0 20px rgba(0, 238, 255, 0.3);
+}
+
+
+/* ================= BUTTONS ================= */
+.neon-button-glow {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transform: translateZ(0); /* Enable GPU acceleration */
+  will-change: transform; /* Optimize for animation */
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.neon-button-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.neon-button-glow:hover::before {
+  left: 100%;
+}
+
+.neon-button-glow:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.neon-button-glow:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.1s ease;
+}
+
+.neon-button-glow-subtle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.neon-button-glow-subtle {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  transform: translateZ(0); /* Enable GPU acceleration */
+  will-change: transform; /* Optimize for animation */
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.neon-button-glow-subtle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: 0.5s;
+}
+
+.neon-button-glow-subtle:hover::before {
+  left: 100%;
+}
+
+.neon-button-glow-subtle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.neon-button-glow-subtle:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.1s ease;
+}
+
+
+/* ================= TABLE ================= */
+.neon-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  transform: translateZ(0); /* Enable GPU acceleration */
+}
+
+.neon-table thead {
+  background: rgba(30, 41, 59, 0.8);
+}
+
+.neon-table th {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-weight: 600;
+  color: #00eeff;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+}
+
+.neon-table td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.neon-table tr {
+  transition: all 0.3s ease;
+  transform: translateZ(0); /* Enable GPU acceleration */
+}
+
+.neon-table tr:hover {
+  background: rgba(0, 238, 255, 0.05);
+}
+
+.neon-table tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* ================= MODAL ================= */
+.neon-modal {
+  background: rgba(20, 20, 35, 0.95);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(0, 238, 255, 0.3);
+  box-shadow: 0 0 50px rgba(0, 238, 255, 0.3);
+  animation: popIn 0.4s ease forwards;
+  transform: translateZ(0); /* Enable GPU acceleration */
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  max-width: 500px;
+  width: 90%;
+  margin: auto;
+  max-height: 90vh;
+}
+
+/* Delete confirmation modal with subtle red glow */
+.neon-modal.delete-confirmation-modal {
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.2), 0 0 50px rgba(0, 238, 255, 0.3);
+}
+
+.neon-modal::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(0, 238, 255, 0.1), transparent);
+  transform: rotate(45deg);
+  z-index: -1;
+  animation: shimmer 3s infinite;
+}
+
+.neon-modal.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.neon-modal.hide {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+/* Square modal for better consistency */
+.neon-modal.square {
+  max-width: 450px;
+  border-radius: 16px;
+}
+
+/* Modal content styling */
+.neon-modal .text-center {
+  padding: 2rem;
+}
+
+.neon-modal .flex.justify-between.items-center {
+  padding: 1.5rem 2rem 1rem;
+}
+
+/* Modal form elements */
+.neon-modal input.neon-input {
+  margin-bottom: 1rem;
+}
+
+.neon-modal .flex.gap-4, .neon-modal .flex.gap-5 {
+  padding: 0 1rem 1.5rem;
+}
+
+/* Modal title styling */
+.neon-modal h2 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+
+/* ================= STRENGTH METER ================= */
+#strengthMeter {
+  position: relative;
+  overflow: hidden;
+  border-radius: 9999px;
+}
+
+#strengthMeter::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: shimmer 2s infinite;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transform: translateZ(0); /* Enable GPU acceleration */
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* ================= TIPS ================= */
+.neon-tips {
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  transform: translateZ(0); /* Enable GPU acceleration */
+}
+
+.neon-tips:hover {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(0, 238, 255, 0.2);
+  box-shadow: 0 0 15px rgba(0, 238, 255, 0.1);
+}
+
+
+/* ================= EXPIRING PASSWORD ITEM ================= */
+.expiring-password-item {
+  background: rgba(255, 100, 100, 0.1);
+  border: 1px solid rgba(255, 100, 100, 0.3);
+  border-radius: 12px;
+  padding: 1.2rem;
+  border-spacing: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  transform: translateZ(0); /* Enable GPU acceleration */
+}
+
+.expiring-password-item:hover {
+  background: rgba(255, 100, 100, 0.2);
+  border: 1px solid rgba(255, 100, 100, 0.5);
+  box-shadow: 0 0 15px rgba(255, 100, 100, 0.2);
+}
+
+/* ================= EXPIRATION WARNINGS ================= */
+.expired-row {
+  background: rgba(255, 100, 100, 0.15);
+  animation: pulseGlow 2s infinite;
+}
+
+.expiring-soon-row {
+  background: rgba(255, 193, 7, 0.15);
+  animation: pulse 2s infinite;
+}
+
+.expired-row:hover {
+  background: rgba(255, 100, 100, 0.25);
+}
+
+.expiring-soon-row:hover {
+  background: rgba(255, 193, 7, 0.25);
+}
+
+
+/* ================= RESPONSIVE DESIGN ================= */
+@media (max-width: 768px) {
+  .nav-link {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-link {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+}
+
+/* ================= SCROLLBAR ================= */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(30, 30, 46, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #00eeff, #0077ff);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #0077ff, #00eeff);
+}
+
+/* ================= SELECTION ================= */
+::selection {
+  background: rgba(0, 238, 255, 0.3);
+}
+
+/* ================= ANIMATION KEYFRAMES ================= */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+  }
+}
+
+
+
+
+
+/* ================= PERFORMANCE OPTIMIZATIONS ================= */
+* {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+@keyframes lightGlow {
+  0% {
+    color: #fff3b0;
+    text-shadow:
+      0 0 3px #ffd700,
+      0 0 6px #ffdd33,
+      0 0 10px #ffcc00,
+      0 0 15px #ff9900;
+  }
+  50% {
+    color: #ffffff;
+    text-shadow:
+      0 0 6px #fff6b3,
+      0 0 12px #ffe066,
+      0 0 18px #ffcc33,
+      0 0 25px #ffaa00;
+  }
+  100% {
+    color: #fff3b0;
+    text-shadow:
+      0 0 3px #ffd700,
+      0 0 6px #ffdd33,
+      0 0 10px #ffcc00,
+      0 0 15px #ff9900;
+  }
+}
+
+/* Targeting the existing icon automatically */
+.fas.fa-lightbulb.text-yellow-500.mt-1.mr-3.text-sm {
+  animation: lightGlow 1.8s infinite ease-in-out;
+}
+
+
+
+@keyframes textGlow {
+  0% {
+    color: #ffffff;
+    text-shadow: 0 0 1px #00b3cc, 0 0 2px #00b3cc, 0 0 3px #00b3cc, 0 0 4px #00e6ff;
+  }
+  50% {
+    color: #ffffff;
+    text-shadow: 0 0 1.5px #00b3cc, 0 0 3px #00b3cc, 0 0 4.5px #00b3cc, 0 0 6px #00e6ff;
+  }
+  100% {
+    color: #ffffff;
+    text-shadow: 0 0 1px #00b3cc, 0 0 2px #00b3cc, 0 0 3px #00b3cc, 0 0 4px #00e6ff;
+  }
+}
+
+/* Applying animation to the two classes */
+.fas.fa-shield-alt.mr-3.text-cyan-400,
+.font-bold.text-gray-300.mb-3.flex.items-center {
+  animation: textGlow 2s infinite ease-in-out;
+}
+
+
+
+@media (max-width: 768px) {
+  /* Mendel tape */
+  #navbar {
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(8px);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.4);
+    z-index: 10;
+    animation: slideDown 0.3s ease forwards;
+  }
+
+  /* When the user presses the third condition */
+  #navbar.show {
+    display: flex;
+  }
+
+  /* Downward movement */
+  @keyframes slideDown {
+    from {
+      transform: translateY(-10px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  /* Links inside the strip */
+  #navbar a,
+  #navbar button {
+    margin: 0 8px;
+    font-size: 14px;
+  }
+
+  /* The toggle button shows up only on mobile */
+  #menuToggle {
+    display: block;
+  }
+
+  /* The header remains natural without any modification */
+  header {
+    position: relative !important;
+    overflow: visible !important;
+  }
+
+  /* No Scrollbar on the side */
+  body {
+    overflow-x: hidden;
+  }
+}
+
+
+
+
+
+/* Prevents horizontal spacing on mobile */
+@media (max-width: 768px) {
+  body, html {
+    overflow-x: hidden !important;
+    width: 100% !important;
+  }
+
+  /* To prevent horizontal spacing on mobile */
+  .overflow-x-auto {
+    overflow-x: auto !important;
+    display: block !important;
+    width: 100% !important;
+  }
+}
