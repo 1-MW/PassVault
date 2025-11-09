@@ -281,7 +281,20 @@
     });
 
    
+// Disable developer tools access
+    const disableDevTools = (e) => {
+      if (
+        e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+        (e.ctrlKey && e.key === 'U')
+      ) {
+        e.preventDefault();
+        showNotification('Developer tools access restricted', 'warning');
+        return false;
+      }
+    };
 
+    document.addEventListener('keydown', disableDevTools);
     
 
     // Disable dragging of elements
@@ -301,4 +314,5 @@
   </script>
   <script src="script.js"></script>
 </body>
+
 </html>
