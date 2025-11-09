@@ -1,4 +1,22 @@
+# PassVault Robots.txt
+# Author: Mohamed Walid (MW)
+# Purpose: Allow Google and other search engines to fully index the PassVault website
+
 User-agent: *
 Allow: /
 
+# Prevent indexing of service worker and caching scripts
+Disallow: /sw.js
+Disallow: /static-cache.js
+
+# Sitemap location
 Sitemap: https://1-mw.github.io/PassVault/sitemap.xml
+
+# Extra SEO guidance
+# Encourage indexing of the main pages
+Allow: /index.html
+Allow: /about.html
+Allow: /contact.html
+
+# Delay between crawl requests (optional but recommended)
+Crawl-delay: 10
